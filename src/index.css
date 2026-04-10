@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Rota360 Brand Palette */
+    --background: 210 25% 97%;
+    --foreground: 210 50% 15%;
+
+    --card: 210 20% 98%;
+    --card-foreground: 210 50% 15%;
+
+    --popover: 210 20% 98%;
+    --popover-foreground: 210 50% 15%;
+
+    /* Deep Blue - primary brand color */
+    --primary: 210 80% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Light Blue/Cyan - secondary accent */
+    --secondary: 195 85% 50%;
+    --secondary-foreground: 210 50% 15%;
+
+    /* Muted blue tones */
+    --muted: 210 15% 90%;
+    --muted-foreground: 210 20% 45%;
+
+    /* Orange accent - for "360" highlights */
+    --accent: 30 95% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 88%;
+    --input: 210 20% 88%;
+    --ring: 210 80% 40%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens - Rota360 gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(210 80% 40%) 0%, hsl(195 85% 50%) 50%, hsl(30 95% 55%) 100%);
+    --gradient-brand: linear-gradient(135deg, hsl(210 80% 40%) 0%, hsl(210 70% 50%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(30 95% 55%) 0%, hsl(35 90% 50%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(210 25% 97% / 0.85) 0%, hsl(210 20% 98% / 0.6) 100%);
+    
+    --shadow-brand: 0 4px 20px -4px hsl(210 80% 40% / 0.25);
+    --shadow-card: 0 4px 24px -8px hsl(210 50% 15% / 0.1);
+    --shadow-elevated: 0 12px 40px -12px hsl(210 50% 15% / 0.15);
+
+    --sidebar-background: 210 20% 98%;
+    --sidebar-foreground: 210 50% 15%;
+    --sidebar-primary: 210 80% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 195 85% 50%;
+    --sidebar-accent-foreground: 210 50% 15%;
+    --sidebar-border: 210 20% 88%;
+    --sidebar-ring: 210 80% 40%;
+  }
+
+  .dark {
+    --background: 210 30% 8%;
+    --foreground: 210 15% 95%;
+
+    --card: 210 25% 12%;
+    --card-foreground: 210 15% 95%;
+
+    --popover: 210 25% 12%;
+    --popover-foreground: 210 15% 95%;
+
+    --primary: 210 80% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 195 75% 45%;
+    --secondary-foreground: 210 15% 95%;
+
+    --muted: 210 20% 18%;
+    --muted-foreground: 210 15% 60%;
+
+    --accent: 30 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 210 15% 95%;
+
+    --border: 210 20% 20%;
+    --input: 210 20% 20%;
+    --ring: 210 80% 50%;
+
+    --sidebar-background: 210 25% 10%;
+    --sidebar-foreground: 210 15% 95%;
+    --sidebar-primary: 210 80% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 195 75% 45%;
+    --sidebar-accent-foreground: 210 15% 95%;
+    --sidebar-border: 210 20% 20%;
+    --sidebar-ring: 210 80% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-hero);
+  }
+
+  .bg-glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(12px);
+  }
+
+  .shadow-warm {
+    box-shadow: var(--shadow-warm);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
