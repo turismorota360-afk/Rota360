@@ -28,7 +28,7 @@ const GlobeLanding = () => {
             <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
               Sobre
             </a>
-            <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
+            <a href="/parceiros" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
               Parceiros
             </a>
             <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
