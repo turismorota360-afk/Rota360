@@ -8,12 +8,12 @@ const CitySearch = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   const filteredCities = tocantinsCities.filter(
     (city) =>
-      city.name.toLowerCase().includes(query.toLowerCase()) ||
-      city.shortDescription.toLowerCase().includes(query.toLowerCase())
+      city.name.toLowerCase().startsWith(query.toLowerCase())
   );
 
   const handleSelect = (slug: string) => {
@@ -36,12 +36,23 @@ const CitySearch = () => {
     }
   };
 
+  // Fecha ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   useEffect(() => {
     setSelectedIndex(0);
   }, [query]);
 
   return (
-    <div className="relative w-full max-w-md">
+    <div ref={containerRef} className="relative w-full max-w-md" style={{ zIndex: 100 }}>
       <div className="relative">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/60" />
         <input
@@ -60,13 +71,16 @@ const CitySearch = () => {
       </div>
 
       {isOpen && query.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-background/98 backdrop-blur-md border border-border rounded-xl shadow-elevated overflow-hidden z-50">
+        <div
+          className="absolute top-full left-0 right-0 mt-2 bg-background border border-border rounded-xl shadow-2xl overflow-hidden"
+          style={{ zIndex: 200 }}
+        >
           {filteredCities.length > 0 ? (
             <ul className="max-h-64 overflow-y-auto">
               {filteredCities.map((city, index) => (
                 <li key={city.slug}>
                   <button
-                    onClick={() => handleSelect(city.slug)}
+                    onMouseDown={() => handleSelect(city.slug)}
                     className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
                       index === selectedIndex
                         ? "bg-accent/10 text-foreground"

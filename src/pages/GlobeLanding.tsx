@@ -9,31 +9,35 @@ const RealisticGlobe = lazy(() => import("@/components/RealisticGlobe"));
 
 const GlobeLanding = () => {
   const navigate = useNavigate();
-  
-  <button onClick={() => navigate("/home")}>
-    Entrar
-  </button>
+
   return (
     <div className="min-h-screen bg-[hsl(220,30%,6%)] overflow-hidden">
 
       {/* Minimal Header */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <img 
-            src={rota360Logo} 
-            alt="Rota360 - Turismo Digital" 
+          <img
+            src={rota360Logo}
+            alt="Rota360 - Turismo Digital"
             className="h-12 md:h-14 w-auto drop-shadow-lg"
           />
-          <nav className="hidden md:flex items-center gap-6">
-            <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-10">
+            <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-lg font-medium">
               Sobre
             </a>
-            <a href="/parceiros" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
+            <a href="/parceiros" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-lg font-medium">
               Parceiros
             </a>
-            <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm font-medium">
+            <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-lg font-medium">
               Contato
             </a>
+            <Button
+              size="sm"
+              onClick={() => navigate("/tocantins")}
+              className="bg-accent hover:bg-accent/90 text-accent-foreground px-5"
+            >
+              Explorar
+            </Button>
           </nav>
         </div>
       </header>
@@ -41,19 +45,19 @@ const GlobeLanding = () => {
       {/* Main Content - Split Layout */}
       <div className="relative min-h-screen flex flex-col lg:flex-row">
         {/* Left Panel - Content */}
-        <div className="relative z-20 w-full lg:w-1/2 xl:w-2/5 min-h-screen flex flex-col justify-center px-6 lg:px-12 xl:px-16 py-24">
+        <div className="relative w-full lg:w-1/2 xl:w-2/5 min-h-screen flex flex-col justify-center px-6 lg:px-12 xl:px-16 py-24" style={{ zIndex: 50 }}>
           <div className="max-w-lg">
             {/* Badge */}
-            <div 
+            <div
               className="animate-fade-up inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-full px-4 py-2 mb-8"
               style={{ animationDelay: "0.1s", opacity: 0, animationFillMode: "forwards" }}
             >
               <Compass className="w-4 h-4 text-accent" />
               <span className="text-primary-foreground text-sm font-medium">Turismo Digital Imersivo</span>
             </div>
-            
+
             {/* Main Title */}
-            <h1 
+            <h1
               className="animate-fade-up font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight"
               style={{ animationDelay: "0.2s", opacity: 0, animationFillMode: "forwards" }}
             >
@@ -62,31 +66,31 @@ const GlobeLanding = () => {
               <br />
               em 360°
             </h1>
-            
+
             {/* Description */}
-            <p 
+            <p
               className="animate-fade-up text-lg text-primary-foreground/80 mb-10 leading-relaxed"
               style={{ animationDelay: "0.3s", opacity: 0, animationFillMode: "forwards" }}
             >
-              Explore destinos únicos, planeje rotas personalizadas e 
+              Explore destinos únicos, planeje rotas personalizadas e
               viva experiências imersivas nos mais belos lugares do Brasil.
             </p>
 
             {/* Search Bar */}
-            <div 
+            <div
               className="animate-fade-up mb-8"
-              style={{ animationDelay: "0.4s", opacity: 0, animationFillMode: "forwards" }}
-            >
+              style={{ animationDelay: "0.4s", opacity: 0, animationFillMode: "forwards", position: "relative", zIndex: 200 }}
+>
               <CitySearch />
             </div>
 
             {/* CTA Button */}
-            <div 
+            <div
               className="animate-fade-up flex items-center gap-4 mb-12"
               style={{ animationDelay: "0.5s", opacity: 0, animationFillMode: "forwards" }}
             >
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 onClick={() => navigate("/tocantins")}
                 className="group bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg"
               >
@@ -96,7 +100,7 @@ const GlobeLanding = () => {
             </div>
 
             {/* Hint */}
-            <div 
+            <div
               className="animate-fade-up flex items-center gap-3 text-primary-foreground/60 text-sm"
               style={{ animationDelay: "0.6s", opacity: 0, animationFillMode: "forwards" }}
             >
@@ -134,8 +138,8 @@ const GlobeLanding = () => {
                 </div>
               ))}
             </div>
-            
-            <Button 
+
+            <Button
               variant="outline"
               size="sm"
               onClick={() => navigate("/tocantins")}
