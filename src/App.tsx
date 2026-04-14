@@ -9,6 +9,9 @@ import CityDetail from "./pages/CityDetail";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 import Parceiros from "./pages/Parceiros";
+import Sobre from "./pages/Sobre";
+import Contato from "./pages/Contato";
+
 
 const queryClient = new QueryClient();
 
@@ -19,6 +22,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/sobre" element={<Sobre />} />
+          <Route path="/contato" element={<Contato />} />
           <Route path="/parceiros" element={<Parceiros />} />
           <Route path="/" element={<GlobeLanding />} />   // tela inicial
           <Route path="/home" element={<Index />} />      // página com filtro

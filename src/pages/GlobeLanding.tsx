@@ -21,14 +21,14 @@ const GlobeLanding = () => {
             alt="Rota360 - Turismo Digital"
             className="h-12 md:h-14 w-auto drop-shadow-lg"
           />
-          <nav className="hidden md:flex items-center gap-10">
-            <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-lg font-medium">
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="/sobre" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-lg font-medium">
               Sobre
             </a>
             <a href="/parceiros" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-lg font-medium">
               Parceiros
             </a>
-            <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-lg font-medium">
+            <a href="/contato" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-lg font-medium">
               Contato
             </a>
             <Button
@@ -79,8 +79,8 @@ const GlobeLanding = () => {
             {/* Search Bar */}
             <div
               className="animate-fade-up mb-8"
-              style={{ animationDelay: "0.4s", opacity: 0, animationFillMode: "forwards", position: "relative", zIndex: 200 }}
->
+              style={{ animationDelay: "0.4s", opacity: 0, animationFillMode: "forwards" }}
+            >
               <CitySearch />
             </div>
 
