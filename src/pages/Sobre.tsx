@@ -12,10 +12,16 @@ const equipe = [
     inicial: "M",
   },
   {
-    nome: "Luma Moisés",
-    cargo: "Co-fundadora & Design",
+    nome: "Luma ",
+    cargo: "Co-fundadora & Gerente de marketing",
     descricao: "Responsável pela experiência do usuário e identidade visual da Rota360.",
     inicial: "L",
+  },
+  {
+    nome: "Moises ",
+    cargo: "Co-fundador & Gerente de segurança",
+    descricao: "Responsável pela segurança dos pagamentos e navegação dos usuarios",
+    inicial: "M",
   },
   {
     nome: "Douglas",
@@ -158,7 +164,7 @@ const Sobre = () => {
                 Um time apaixonado pelo Tocantins e pela tecnologia, unido pelo propósito de transformar o turismo do estado.
               </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {equipe.map((pessoa, index) => (
                 <Card key={index} variant="elevated" className="group hover:border-primary/30 transition-all duration-300 text-center">
                   <CardContent className="p-8">
