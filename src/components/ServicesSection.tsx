@@ -1,4 +1,4 @@
-import { UtensilsCrossed, Hotel, Users, Car, Calendar, Phone, Star } from "lucide-react";
+import { UtensilsCrossed, Hotel, Users, Calendar, Phone, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -33,11 +33,11 @@ const services: Service[] = [
     count: "50+ guias",
   },
   {
-    id: "transport",
-    icon: Car,
-    title: "Transporte",
-    description: "Veículos 4x4 e transfers para todos os atrativos",
-    count: "15+ empresas",
+    id: "tourism-companies",
+    icon: Star,
+    title: "Empresas de Turismo",
+    description: "Agências e operadoras especializadas em turismo local",
+    count: "10+ empresas",
   },
   {
     id: "events",
