@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { MapPin, Calendar, Clock, Star, ChevronRight, ArrowLeft, Eye, Users, Phone, Hotel, UtensilsCrossed, Car } from "lucide-react";
+import { MapPin, Calendar, Clock, Star, ChevronRight, ArrowLeft, Eye, Users, Phone, Hotel, UtensilsCrossed,} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getCityBySlug, getAttractionsByCity, tocantinsCities } from "@/data/tocantinsCities";
@@ -48,7 +48,7 @@ const CityDetail = () => {
     { icon: UtensilsCrossed, title: "Restaurantes", count: "15+" },
     { icon: Hotel, title: "Hospedagem", count: "25+" },
     { icon: Users, title: "Guias", count: "30+" },
-    { icon: Car, title: "Transporte", count: "10+" },
+    { icon: Star, title: "Empresas de Turismo", count: "10+" },
   ];
 
   return (
