@@ -8,6 +8,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import rota360Logo from "@/assets/rota360-logo.png";
+import { useSearchParams } from "react-router-dom";
+
 
 // ─── DADOS MUNICÍPIOS ────────────────────────────────────────────────────────
 
@@ -138,8 +140,9 @@ type Aba = "municipios" | "empresas";
 
 const Parceiros = () => {
   const navigate = useNavigate();
-  const [aba, setAba] = useState<Aba>("municipios");
-
+  const [searchParams] = useSearchParams();
+  const tipoParam = searchParams.get("tipo") as Aba | null;
+  const [aba, setAba] = useState<Aba>(tipoParam === "empresas" ? "empresas" : "municipios");
   const scrollContato = () =>
     document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
 

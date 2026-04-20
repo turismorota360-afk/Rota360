@@ -45,11 +45,11 @@ const CityDetail = () => {
   const categories = ["Todos", "Natureza", "Aventura", "Cachoeira", "Cultural", "Gastronomia"];
 
   const services = [
-    { icon: UtensilsCrossed, title: "Restaurantes", count: "15+" },
-    { icon: Hotel, title: "Hospedagem", count: "25+" },
-    { icon: Users, title: "Guias", count: "30+" },
-    { icon: Star, title: "Empresas de Turismo", count: "10+" },
-  ];
+  { icon: UtensilsCrossed, title: "Restaurantes",       count: "15+", categoria: "restaurantes" },
+  { icon: Hotel,           title: "Hospedagem",          count: "25+", categoria: "hospedagem"   },
+  { icon: Users,           title: "Guias",               count: "30+", categoria: "guias"        },
+  { icon: Star,            title: "Empresas de Turismo", count: "10+", categoria: "turismo"      },
+];
 
   return (
     <div className="min-h-screen bg-background">
@@ -234,7 +234,12 @@ const CityDetail = () => {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {services.map((service, index) => (
-                <Card key={index} variant="elevated" className="group cursor-pointer hover:border-primary/30">
+                <Card
+                    key={index}
+                    variant="elevated"
+                    className="group cursor-pointer hover:border-primary/30"
+                    onClick={() => navigate(`/cidade/${slug}/servicos?categoria=${service.categoria}`)}
+                  >
                   <CardContent className="p-6 text-center">
                     <div className="w-14 h-14 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                       <service.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />

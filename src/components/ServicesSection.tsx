@@ -1,4 +1,5 @@
 import { UtensilsCrossed, Hotel, Users, Calendar, Phone, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -8,6 +9,7 @@ interface Service {
   title: string;
   description: string;
   count: string;
+  to: string;
 }
 
 const services: Service[] = [
@@ -17,6 +19,7 @@ const services: Service[] = [
     title: "Restaurantes",
     description: "Gastronomia local e regional com pratos típicos do cerrado",
     count: "25+ locais",
+    to: "/parceiros?tipo=empresas",
   },
   {
     id: "hotels",
@@ -24,6 +27,7 @@ const services: Service[] = [
     title: "Hospedagem",
     description: "Pousadas, hotéis e camping em meio à natureza",
     count: "40+ opções",
+    to: "/parceiros?tipo=empresas",
   },
   {
     id: "guides",
@@ -31,6 +35,7 @@ const services: Service[] = [
     title: "Guias Turísticos",
     description: "Condutores locais certificados para sua aventura",
     count: "50+ guias",
+    to: "/parceiros?tipo=empresas",
   },
   {
     id: "tourism-companies",
@@ -38,6 +43,7 @@ const services: Service[] = [
     title: "Empresas de Turismo",
     description: "Agências e operadoras especializadas em turismo local",
     count: "10+ empresas",
+    to: "/parceiros?tipo=empresas",
   },
   {
     id: "events",
@@ -45,6 +51,7 @@ const services: Service[] = [
     title: "Eventos",
     description: "Festivais, shows e celebrações culturais",
     count: "10+ eventos/mês",
+    to: "/parceiros#contato",
   },
   {
     id: "emergency",
@@ -52,10 +59,13 @@ const services: Service[] = [
     title: "Serviços de Apoio",
     description: "Emergência, saúde e informações turísticas",
     count: "24h disponível",
+    to: "/parceiros#contato",
   },
 ];
 
 const ServicesSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="servicos" className="py-24 bg-secondary/30">
       <div className="container mx-auto px-4">
@@ -67,17 +77,18 @@ const ServicesSection = () => {
             Tudo que você precisa em um só lugar
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Encontre restaurantes, hotéis, guias turísticos e muito mais. 
+            Encontre restaurantes, hotéis, guias turísticos e muito mais.
             Todos os serviços verificados e integrados ao seu roteiro.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
-            <Card 
-              key={service.id} 
-              variant="elevated" 
+            <Card
+              key={service.id}
+              variant="elevated"
               className="group cursor-pointer hover:border-primary/30"
+              onClick={() => navigate(service.to)}
             >
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
@@ -93,7 +104,14 @@ const ServicesSection = () => {
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium text-primary">{service.count}</span>
-                      <Button variant="ghost" size="sm">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(service.to);
+                        }}
+                      >
                         Ver todos
                       </Button>
                     </div>
@@ -114,10 +132,10 @@ const ServicesSection = () => {
               Empresas e prestadores de serviço avaliados pela comunidade
             </p>
           </div>
-          
+
           <div className="flex flex-wrap items-center justify-center gap-6">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div 
+              <div
                 key={i}
                 className="w-32 h-16 rounded-lg bg-card border border-border flex items-center justify-center text-muted-foreground hover:border-primary/30 hover:shadow-card transition-all cursor-pointer"
               >
