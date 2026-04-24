@@ -12,6 +12,9 @@ import Parceiros from "./pages/Parceiros";
 import Sobre from "./pages/Sobre";
 import Contato from "./pages/Contato";
 import ServicosCity from "./pages/ServicosCity";
+import AttractionDetail from "./pages/AttractionDetail";
+
+
 
 
 const queryClient = new QueryClient();
@@ -32,6 +35,7 @@ const App = () => (
           <Route path="/cidade/:slug" element={<CityDetail />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/cidade/:slug/servicos" element={<ServicosCity />} />
+          <Route path="/atrativo/:id" element={<AttractionDetail />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
