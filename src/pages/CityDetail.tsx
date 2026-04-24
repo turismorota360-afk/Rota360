@@ -201,7 +201,14 @@ const CityDetail = () => {
                           <Star className="w-4 h-4 fill-primary text-primary" />
                           <span className="font-semibold">{attraction.rating}</span>
                         </div>
-                        <Button variant="ghost" size="sm" onClick={() => navigate(`/atrativo/${attraction.id}`)}>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/atrativo/${attraction.id}`);
+                          }}
+                        >
                           Ver detalhes
                         </Button>
                       </div>
