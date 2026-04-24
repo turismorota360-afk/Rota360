@@ -6,6 +6,7 @@ import dunasImg from "@/assets/dunas.jpg";
 import cachoeiraImg from "@/assets/cachoeira.jpg";
 import { useState } from "react";
 import { attractions } from "@/data/tocantinsCities";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   "todos",
@@ -38,6 +39,9 @@ const AttractionsSection = () => {
 
   console.log("Selecionado:", selectedCategory);
   console.log("FILTRO:", filteredAttractions);
+
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -119,7 +123,11 @@ const AttractionsSection = () => {
                       <span className="font-semibold">{attraction.rating}</span>
                       <span className="text-muted-foreground text-sm">(128 avaliações)</span>
                     </div>
-                    <Button variant="ghost" size="sm">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => navigate(`/atrativo/${attraction.id}`)}
+                    >
                       Ver detalhes
                     </Button>
                   </div>
