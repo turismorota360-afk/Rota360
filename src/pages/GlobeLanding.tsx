@@ -91,7 +91,7 @@ const GlobeLanding = () => {
 
         {/* Left Panel — overflow visible para dropdown escapar */}
         <div
-          className="relative w-full lg:w-1/2 xl:w-2/5 min-h-screen flex flex-col justify-center px-6 lg:px-12 xl:px-16 py-24"
+          className="relative w-full lg:w-1/2 xl:w-2/5 min-h-screen flex flex-col justify-center px-6 lg:px-12 xl:px-16 pt-32 pb-32"
           style={{ zIndex: 50, overflow: "visible" }}
         >
           <div className="max-w-lg" style={{ overflow: "visible" }}>
@@ -221,7 +221,7 @@ const GlobeLanding = () => {
       </div>
 
       {/* Bottom Stats Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 bg-[hsl(220,30%,6%)]/80 backdrop-blur-md border-t border-white/10">
+      <div className="bg-[hsl(220,30%,6%)] border-t border-white/10">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="hidden md:flex items-center gap-8">
