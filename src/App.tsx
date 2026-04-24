@@ -11,10 +11,9 @@ import Index from "./pages/Index";
 import Parceiros from "./pages/Parceiros";
 import Sobre from "./pages/Sobre";
 import Contato from "./pages/Contato";
-import ServicosCity from "./pages/ServicosCity";
 import AttractionDetail from "./pages/AttractionDetail";
-
-
+import BusinessDetail from "./pages/BusinessDetail";
+import ServicesCity from "./pages/ServicesCity";
 
 
 const queryClient = new QueryClient();
@@ -34,8 +33,8 @@ const App = () => (
           <Route path="/tocantins" element={<TocantinsMap />} />
           <Route path="/cidade/:slug" element={<CityDetail />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/cidade/:slug/servicos" element={<ServicosCity />} />
-          <Route path="/atrativo/:id" element={<AttractionDetail />} />
+          <Route path="/cidade/:slug/servicos" element={<ServicesCity />} />
+          <Route path="/empresa/:businessId" element={<BusinessDetail />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
