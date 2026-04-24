@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MapPin, Users, Star, ChevronRight, ArrowLeft } from "lucide-react";
+import { ChevronRight, ArrowLeft, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { tocantinsCities, getFeaturedCities } from "@/data/tocantinsCities";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import { Icon, divIcon } from "leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Icon } from "leaflet";
 
 const featuredIcon = new Icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -14,6 +14,23 @@ const featuredIcon = new Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
 });
+
+// Imagens fictícias do Unsplash para cada cidade
+const cityImages: Record<string, string> = {
+  palmas:          "https://images.unsplash.com/photo-1598887142487-3c854d51eabb?w=400&q=80",
+  jalapao:         "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&q=80",
+  taquarucu:       "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80",
+  arraias:         "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80",
+  natividade:      "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=400&q=80",
+  araguaina:       "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&q=80",
+  "porto-nacional":"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80",
+  lajeado:         "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=400&q=80",
+  "ilha-do-bananal":"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&q=80",
+  miracema:        "https://images.unsplash.com/photo-1504214208698-ea446addbbfb?w=400&q=80",
+  gurupi:          "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400&q=80",
+};
+
+const fallback = "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80";
 
 const TocantinsMap = () => {
   const navigate = useNavigate();
@@ -66,6 +83,7 @@ const TocantinsMap = () => {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-3 gap-8">
+
               {/* Leaflet Map */}
               <div className="lg:col-span-2">
                 <Card variant="elevated" className="overflow-hidden">
@@ -91,18 +109,30 @@ const TocantinsMap = () => {
                           }}
                         >
                           <Popup>
-                            <div className="p-1 min-w-[180px]">
-                              <h3 className="font-bold text-base mb-1">{city.name}</h3>
-                              <p className="text-sm text-gray-600 mb-1">{city.shortDescription}</p>
-                              <p className="text-xs text-gray-500 mb-3">
-                                {city.attractions}+ atrativos · Pop. {city.population}
-                              </p>
-                              <button
-                                onClick={() => navigate(`/cidade/${city.slug}`)}
-                                className="bg-blue-600 text-white text-xs px-3 py-1.5 rounded-md hover:bg-blue-700 transition-colors w-full"
-                              >
-                                Ver atrativos →
-                              </button>
+                            <div className="min-w-[220px] overflow-hidden rounded-lg" style={{ margin: "-14px -20px -14px -20px" }}>
+                              <img
+                                src={cityImages[city.id] ?? fallback}
+                                alt={city.name}
+                                style={{ width: "100%", height: "110px", objectFit: "cover", display: "block" }}
+                                onError={(e) => { (e.target as HTMLImageElement).src = fallback; }}
+                              />
+                              <div style={{ padding: "12px" }}>
+                                <h3 style={{ fontWeight: "700", fontSize: "15px", marginBottom: "4px" }}>{city.name}</h3>
+                                <p style={{ fontSize: "13px", color: "#555", marginBottom: "4px" }}>{city.shortDescription}</p>
+                                <p style={{ fontSize: "11px", color: "#888", marginBottom: "10px" }}>
+                                  {city.attractions}+ atrativos · Pop. {city.population}
+                                </p>
+                                <button
+                                  onClick={() => navigate(`/cidade/${city.slug}`)}
+                                  style={{
+                                    background: "#2563eb", color: "#fff", fontSize: "12px",
+                                    padding: "6px 12px", borderRadius: "6px", border: "none",
+                                    cursor: "pointer", width: "100%",
+                                  }}
+                                >
+                                  Ver atrativos →
+                                </button>
+                              </div>
                             </div>
                           </Popup>
                         </Marker>
@@ -121,13 +151,19 @@ const TocantinsMap = () => {
                   <Card
                     key={city.id}
                     variant="elevated"
-                    className={`cursor-pointer transition-all duration-300 ${
+                    className={`cursor-pointer transition-all duration-300 overflow-hidden ${
                       hoveredCity === city.id ? "border-primary shadow-warm" : ""
                     }`}
                     onMouseEnter={() => setHoveredCity(city.id)}
                     onMouseLeave={() => setHoveredCity(null)}
                     onClick={() => navigate(`/cidade/${city.slug}`)}
                   >
+                    <img
+                      src={cityImages[city.id] ?? fallback}
+                      alt={city.name}
+                      className="w-full h-36 object-cover"
+                      onError={(e) => { (e.target as HTMLImageElement).src = fallback; }}
+                    />
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
                         <div>
@@ -141,7 +177,7 @@ const TocantinsMap = () => {
                             <span>{city.attractions} atrativos</span>
                           </div>
                         </div>
-                        <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                        <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
                       </div>
                     </CardContent>
                   </Card>
