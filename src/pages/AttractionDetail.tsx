@@ -2,32 +2,21 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, MapPin, Clock, Star, Eye, Users, Phone, Share2, Heart, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { attractions, getCityBySlug, tocantinsCities } from "@/data/tocantinsCities";
-import fervedouro from "@/assets/fervedouro.jpg";
-import dunas from "@/assets/dunas.jpg";
-import cachoeira from "@/assets/cachoeira.jpg";
-import heroJalapao from "@/assets/hero-jalapao.jpg";
-
-// Mapa de imagens por atrativo
-const attractionImages: Record<string, string> = {
-  "fervedouro-ceica": fervedouro,
-  "dunas-jalapao":    dunas,
-  "cachoeira-velha":  cachoeira,
-};
-
-const fallback = heroJalapao;
+import { attractions, getCityBySlug, tocantinsCities } from "../data/tocantinsCities";
 
 // Dicas mockadas por categoria
 const dicasPorCategoria: Record<string, string[]> = {
-  Natureza:     ["Leve protetor solar e repelente", "Evite horários de pico entre 11h e 14h", "Respeite a fauna e flora local"],
-  Aventura:     ["Use calçado adequado para trilhas", "Leve água suficiente para a atividade", "Informe alguém sobre seu roteiro"],
-  Cachoeira:    ["Tome cuidado com pedras escorregadias", "Não mergulhe em áreas sinalizadas", "Leve roupa de banho extra"],
-  Cultural:     ["Respeite os horários de visitação", "Proibido fotografar sem autorização em alguns locais", "Contrate guias locais credenciados"],
-  Gastronomia:  ["Reserve com antecedência nos fins de semana", "Experimente os pratos típicos do cerrado", "Pergunte sobre ingredientes regionais"],
-  Histórico:    ["Vista-se adequadamente para locais religiosos", "Leia as placas informativas", "Não toque nas estruturas históricas"],
-  Turístico:    ["Melhor horário: início da manhã ou fim de tarde", "Leve câmera para os registros", "Confira a previsão do tempo"],
-  Praia:        ["Observe as bandeiras de segurança", "Não deixe lixo na praia", "Hidrate-se bastante"],
+  Natureza: ["Leve protetor solar e repelente", "Evite horários de pico entre 11h e 14h", "Respeite a fauna e flora local"],
+  Aventura: ["Use calçado adequado para trilhas", "Leve água suficiente para a atividade", "Informe alguém sobre seu roteiro"],
+  Cachoeira: ["Tome cuidado com pedras escorregadias", "Não mergulhe em áreas sinalizadas", "Leve roupa de banho extra"],
+  Cultural: ["Respeite os horários de visitação", "Proibido fotografar sem autorização em alguns locais", "Contrate guias locais credenciados"],
+  Gastronomia: ["Reserve com antecedência nos fins de semana", "Experimente os pratos típicos do cerrado", "Pergunte sobre ingredientes regionais"],
+  Histórico: ["Vista-se adequadamente para locais religiosos", "Leia as placas informativas", "Não toque nas estruturas históricas"],
+  Turístico: ["Melhor horário: início da manhã ou fim de tarde", "Leve câmera para os registros", "Confira a previsão do tempo"],
+  Praia: ["Observe as bandeiras de segurança", "Não deixe lixo na praia", "Hidrate-se bastante"],
 };
+
+const FALLBACK_IMG = "https://commons.wikimedia.org/wiki/Special:FilePath/Dunas%20do%20Jalap%C3%A3o%20(53037590028).jpg";
 
 const AttractionDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -36,7 +25,6 @@ const AttractionDetail = () => {
   const attraction = attractions.find((a) => a.id === id);
   const city = attraction ? tocantinsCities.find((c) => c.id === attraction.cityId) : null;
 
-  // Outros atrativos da mesma cidade
   const outrosAtrativos = attraction
     ? attractions.filter((a) => a.cityId === attraction.cityId && a.id !== attraction.id).slice(0, 3)
     : [];
@@ -53,7 +41,8 @@ const AttractionDetail = () => {
   }
 
   const dicas = dicasPorCategoria[attraction.category] ?? dicasPorCategoria["Turístico"];
-  const imgSrc = attractionImages[attraction.id] ?? fallback;
+  // ✅ Usa diretamente o campo image do data, com fallback se estiver vazio
+  const imgSrc = attraction.image || FALLBACK_IMG;
 
   return (
     <div className="min-h-screen bg-background">
@@ -87,11 +76,10 @@ const AttractionDetail = () => {
             src={imgSrc}
             alt={attraction.name}
             className="w-full h-full object-cover"
-            onError={(e) => { (e.target as HTMLImageElement).src = fallback; }}
+            onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
 
-          {/* Badges sobre a imagem */}
           <div className="absolute top-6 left-6 flex gap-2">
             <span className="bg-background/90 backdrop-blur-sm text-foreground text-xs font-medium px-3 py-1.5 rounded-full">
               {attraction.category}
@@ -108,10 +96,7 @@ const AttractionDetail = () => {
         <div className="container mx-auto px-4 -mt-8 relative z-10">
           <div className="grid lg:grid-cols-3 gap-8">
 
-            {/* Conteúdo principal */}
             <div className="lg:col-span-2 space-y-6">
-
-              {/* Título e rating */}
               <div>
                 <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
                   {attraction.name}
@@ -133,14 +118,12 @@ const AttractionDetail = () => {
                 </div>
               </div>
 
-              {/* Descrição */}
               <Card variant="elevated">
                 <CardContent className="p-6">
                   <h2 className="font-display font-semibold text-lg text-foreground mb-3">Sobre o atrativo</h2>
                   <p className="text-muted-foreground leading-relaxed">
                     {attraction.description}
                   </p>
-                  {/* Descrição expandida mockada */}
                   <p className="text-muted-foreground leading-relaxed mt-3">
                     Este é um dos pontos turísticos mais visitados de {city?.name}, atraindo visitantes
                     de todo o Brasil e do exterior. A região oferece uma experiência única em contato
@@ -150,7 +133,6 @@ const AttractionDetail = () => {
                 </CardContent>
               </Card>
 
-              {/* Dicas */}
               <Card variant="elevated">
                 <CardContent className="p-6">
                   <h2 className="font-display font-semibold text-lg text-foreground mb-4">
@@ -169,7 +151,6 @@ const AttractionDetail = () => {
                 </CardContent>
               </Card>
 
-              {/* Outros atrativos da cidade */}
               {outrosAtrativos.length > 0 && (
                 <div>
                   <h2 className="font-display font-semibold text-lg text-foreground mb-4">
@@ -185,10 +166,10 @@ const AttractionDetail = () => {
                       >
                         <div className="h-28 overflow-hidden rounded-t-lg">
                           <img
-                            src={attractionImages[outro.id] ?? fallback}
+                            src={outro.image || FALLBACK_IMG}
                             alt={outro.name}
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                            onError={(e) => { (e.target as HTMLImageElement).src = fallback; }}
+                            onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
                           />
                         </div>
                         <CardContent className="p-3">
@@ -205,10 +186,7 @@ const AttractionDetail = () => {
               )}
             </div>
 
-            {/* Sidebar */}
             <div className="space-y-4">
-
-              {/* Card de ação */}
               <Card variant="elevated" className="sticky top-20">
                 <CardContent className="p-6 space-y-4">
                   <div>
@@ -226,35 +204,23 @@ const AttractionDetail = () => {
 
                   <hr className="border-border" />
 
-                  <Button
-                    className="w-full"
-                    onClick={() => navigate(`/cidade/${city?.slug}`)}
-                  >
+                  <Button className="w-full" onClick={() => navigate(`/cidade/${city?.slug}`)}>
                     <MapPin className="w-4 h-4 mr-2" />
                     Ver mais em {city?.name}
                   </Button>
 
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    onClick={() => navigate(`/cidade/${city?.slug}/servicos?categoria=guias`)}
-                  >
+                  <Button variant="outline" className="w-full" onClick={() => navigate(`/cidade/${city?.slug}/servicos?categoria=guias`)}>
                     <Users className="w-4 h-4 mr-2" />
                     Contratar guia local
                   </Button>
 
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    onClick={() => navigate("/parceiros")}
-                  >
+                  <Button variant="outline" className="w-full" onClick={() => navigate("/parceiros")}>
                     <Calendar className="w-4 h-4 mr-2" />
                     Planejar roteiro
                   </Button>
                 </CardContent>
               </Card>
 
-              {/* Contato emergência */}
               <Card variant="elevated">
                 <CardContent className="p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">

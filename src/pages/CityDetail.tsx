@@ -3,18 +3,9 @@ import { MapPin, Calendar, Clock, Star, ChevronRight, ArrowLeft, Eye, Users, Pho
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getCityBySlug, getAttractionsByCity, tocantinsCities } from "@/data/tocantinsCities";
-import heroJalapao from "@/assets/hero-jalapao.jpg";
-import fervedouro from "@/assets/fervedouro.jpg";
-import dunas from "@/assets/dunas.jpg";
-import cachoeira from "@/assets/cachoeira.jpg";
 import { useState } from "react";
 
-// Map of images for attractions
-const attractionImages: Record<string, string> = {
-  "fervedouro-ceica": fervedouro,
-  "dunas-jalapao": dunas,
-  "cachoeira-velha": cachoeira,
-};
+const FALLBACK_IMG = "https://commons.wikimedia.org/wiki/Special:FilePath/Dunas%20do%20Jalap%C3%A3o%20(53037590028).jpg";
 
 const CityDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -39,17 +30,17 @@ const CityDetail = () => {
     );
   }
 
-  // Use Jalapão hero image for all cities for now
-  const heroImage = heroJalapao;
+  // ✅ Usa a imagem real da cidade vinda do data
+  const heroImage = city.image || FALLBACK_IMG;
 
   const categories = ["Todos", "Natureza", "Aventura", "Cachoeira", "Cultural", "Gastronomia"];
 
   const services = [
-  { icon: UtensilsCrossed, title: "Restaurantes",       count: "15+", categoria: "restaurantes" },
-  { icon: Hotel,           title: "Hospedagem",          count: "25+", categoria: "hospedagem"   },
-  { icon: Users,           title: "Guias",               count: "30+", categoria: "guias"        },
-  { icon: Star,            title: "Empresas de Turismo", count: "10+", categoria: "turismo"      },
-];
+    { icon: UtensilsCrossed, title: "Restaurantes",       count: "15+", categoria: "restaurantes" },
+    { icon: Hotel,           title: "Hospedagem",          count: "25+", categoria: "hospedagem"   },
+    { icon: Users,           title: "Guias",               count: "30+", categoria: "guias"        },
+    { icon: Star,            title: "Empresas de Turismo", count: "10+", categoria: "turismo"      },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -81,9 +72,10 @@ const CityDetail = () => {
         <section className="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src={heroImage} 
+              src={heroImage}
               alt={city.name} 
               className="w-full h-full object-cover"
+              onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
           </div>
@@ -160,9 +152,10 @@ const CityDetail = () => {
                   <Card key={attraction.id} variant="image" className="group cursor-pointer">
                     <div className="relative h-64 overflow-hidden">
                       <img 
-                        src={attractionImages[attraction.id] || fervedouro} 
+                        src={attraction.image || FALLBACK_IMG}
                         alt={attraction.name}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-transparent to-transparent" />
                       
@@ -242,11 +235,11 @@ const CityDetail = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {services.map((service, index) => (
                 <Card
-                    key={index}
-                    variant="elevated"
-                    className="group cursor-pointer hover:border-primary/30"
-                    onClick={() => navigate(`/cidade/${slug}/servicos?categoria=${service.categoria}`)}
-                  >
+                  key={index}
+                  variant="elevated"
+                  className="group cursor-pointer hover:border-primary/30"
+                  onClick={() => navigate(`/cidade/${slug}/servicos?categoria=${service.categoria}`)}
+                >
                   <CardContent className="p-6 text-center">
                     <div className="w-14 h-14 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                       <service.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
