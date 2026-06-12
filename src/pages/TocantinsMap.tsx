@@ -17,17 +17,17 @@ const featuredIcon = new Icon({
 
 // Imagens fictícias do Unsplash para cada cidade
 const cityImages: Record<string, string> = {
-  palmas:          "https://images.unsplash.com/photo-1598887142487-3c854d51eabb?w=400&q=80",
-  jalapao:         "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&q=80",
-  taquarucu:       "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80",
-  arraias:         "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80",
-  natividade:      "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=400&q=80",
+  palmas:          "/assets/palmas-to.jpg",
+  jalapao:         "/assets/dunas-jalapao.jpg",
+  taquarucu:       "/assets/festival-taquarucu.jpg",
+  arraias:         "/assets/serra-espirito-santo.jpg",
+  natividade:      "/assets/comunidade-mumbuca.jpg",
   araguaina:       "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&q=80",
-  "porto-nacional":"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80",
+  "porto-nacional":"/assets/catedral-palmas.jpg",
   lajeado:         "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=400&q=80",
   "ilha-do-bananal":"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&q=80",
   miracema:        "https://images.unsplash.com/photo-1504214208698-ea446addbbfb?w=400&q=80",
-  gurupi:          "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400&q=80",
+  gurupi:          "/assets/feira-artesanato-gurupi.jpg",
 };
 
 const fallback = "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80";

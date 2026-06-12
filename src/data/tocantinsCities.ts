@@ -15,6 +15,15 @@ const WM = (f: string) =>
 
 export const tocantinsCities: City[] = [
   {
+  id: "gurupi", name: "Gurupi", slug: "gurupi",
+  description: "Localizada no sul do Tocantins, Gurupi combina desenvolvimento urbano com atrações naturais e culturais.",
+  shortDescription: "Terceira maior cidade do Tocantins.",
+  coordinates: { lat: -11.729, lng: -49.068 }, mapPosition: { x: 45, y: 78 },
+  population: "85 mil", attractions: 9, featured: true,
+  image: "/assets/parque-mutuca.jpg",
+  },
+
+  {
     id: "palmas", name: "Palmas", slug: "palmas",
     description: "Capital do Tocantins, cidade planejada com belas praias de água doce, parques e uma qualidade de vida invejável.",
     shortDescription: "Capital planejada com praias de água doce",
@@ -94,14 +103,7 @@ export const tocantinsCities: City[] = [
     population: "20 mil", attractions: 8, featured: false,
     image: "/assets/praia-caju.jpg",
   },
-  {
-    id: "gurupi", name: "Gurupi", slug: "gurupi",
-    description: "Localizada no sul do Tocantins, Gurupi combina desenvolvimento urbano com atrações naturais e culturais.",
-    shortDescription: "Terceira maior cidade do Tocantins.",
-    coordinates: { lat: -11.729, lng: -49.068 }, mapPosition: { x: 45, y: 78 },
-    population: "85 mil", attractions: 9, featured: true,
-    image: WM("Cerrado blowing flowers.jpg"),
-  },
+
 ];
 
 export const attractions: Attraction[] = [
@@ -256,36 +258,26 @@ export const attractions: Attraction[] = [
     image: WM("Rio Tocantins e Praia do Tucunaré.JPG"),
     description: "Passeio de barco pelo maior rio do estado com observação de fauna ribeirinha." },
 
-  // ─── GURUPI ───────────────────────────────────────────────────────
+    // ─── GURUPI ───────────────────────────────────────────────────────
   { id: "parque-mutuca", cityId: "gurupi", name: "Parque Mutuca",
     category: "Natureza", location: "Gurupi, TO", duration: "1 dia", rating: 4.4, has360: true,
-    image: WM("Cerrado blowing flowers.jpg"),
+    image: "/assets/parque-mutuca.jpg",
     description: "Parque ecológico de Gurupi com áreas verdes, trilhas e paisagens do cerrado." },
 
   { id: "feira-do-artesanato", cityId: "gurupi", name: "Feira do Artesanato",
     category: "Cultural", location: "Gurupi, TO", duration: "1-2 horas", rating: 4.6, has360: true,
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80",
-    description: "Explore peças únicas em cerâmica, madeira e capim dourado." },
+    image: "/assets/feira-artesanato-gurupi.jpg",
+    description: "Explore peças únicas em cerâmica, madeira e capim dourado do Tocantins." },
 
   { id: "mercado-municipal", cityId: "gurupi", name: "Mercado Municipal",
     category: "Gastronomia", location: "Gurupi, TO", duration: "1-2 horas", rating: 4.6, has360: true,
-    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&auto=format&fit=crop&q=80",
+    image: "/assets/mercado-municipal-gurupi.jpg",
     description: "Mercado tradicional que reúne gastronomia regional, produtos típicos e artesanato." },
 
   { id: "centro-cultural-mauro-cunha", cityId: "gurupi", name: "Centro Cultural Mauro Cunha",
     category: "Cultural", location: "Gurupi, TO", duration: "1-2 horas", rating: 4.4, has360: false,
-    image: "https://images.unsplash.com/photo-1605101100278-5d1deb2b6498?w=800&auto=format&fit=crop&q=80",
+    image: "/assets/centro-cultural-gurupi.jpg",
     description: "Principal espaço cultural da cidade com exposições e eventos artísticos." },
-
-  { id: "lago-gurupi", cityId: "gurupi", name: "Lago de Gurupi",
-    category: "Natureza", location: "Gurupi, TO", duration: "2-4 horas", rating: 4.3, has360: false,
-    image: "/assets/praia-caju.jpg",
-    description: "Lago artificial com orla para caminhadas, pesca e passeios de barco." },
-
-  { id: "parque-linear-gurupi", cityId: "gurupi", name: "Parque Linear",
-    category: "Natureza", location: "Gurupi, TO", duration: "1-2 horas", rating: 4.2, has360: false,
-    image: WM("Cerrado blowing flowers.jpg"),
-    description: "Parque urbano com ciclovia, academia ao ar livre e áreas de convivência." },
 
   // ─── TAQUARUÇU ────────────────────────────────────────────────────
   { id: "cachoeira-roncadeira", cityId: "taquarucu", name: "Cachoeira Roncadeira",
